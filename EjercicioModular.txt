@@ -1,0 +1,210 @@
+class Vehiculo { 
+  int llantas; 
+  int asientos; 
+  String modelo; 
+  String marca;
+  
+  
+  Vehiculo( this.llantas, this.asientos,this.marca, this.modelo );
+  
+  @override
+  String toString() {
+    return """ 
+    Vehiculo:[ 
+      llantas: $llantas
+      asientos: $asientos
+      modelo: $modelo
+      marca: $marca
+      ]
+    """;
+  }
+  
+}
+
+ bool esMayorFunction( int numeroUno, int numeroDos  ){
+   return (numeroUno > numeroDos );
+}
+
+int compareToDateNow( String date ){
+  DateTime currentTime =  DateTime.now();
+  DateTime otherDate = DateTime.parse( date );
+  return currentTime.compareTo( otherDate );
+}
+
+String compareToDateNowasString( String date ){
+  DateTime currentTime =  DateTime.now();
+  DateTime otherDate = DateTime.parse( date );
+  int result = currentTime.compareTo( otherDate );
+  return ( ( result >= 0 ) ? 'ahora o en el futuro': ' del pasado' ); 
+}
+
+String compareToDateNowasStringTwo( String date ){
+  int result =   DateTime.now().compareTo( DateTime.parse( date) );
+  return ( ( result >= 0 ) ? 'ahora o en el futuro': ' del pasado' );
+}
+
+void compareToDateNowPrint(){
+  
+  String momento = ( ( compareToDateNow('2020-11-20') >= 0 ) ? 'ahora o en     el futuro': ' del pasado' );
+  
+  print( momento );
+
+  
+  String momentoDos = ( ( compareToDateNow( '2022-09-01' ) >= 0 )? "ahora o   en el futura": "del pasadoo" );
+
+  print( momentoDos );
+}
+
+String esMayorAsString( bool isTrue ){
+  
+  String isMayorAsString = ( ( isTrue == true )?"si es mayor": "no es mayor" );
+  return isMayorAsString;
+}
+
+String esMayorAsStringIf( bool isTrue ){
+  if( isTrue ){
+    return "es mayor desde un if";
+  }else{
+    return "no es mayor desde un if";
+   }
+}
+
+dynamic esMayorDinamico( bool isTrue ){
+  return ( (isTrue)? "si es mayor Dynamic" : 52 );
+}
+
+void esMayorVar(){
+  var isMayorVar = ( ( 5>6 )? "si es mayor tipo var" : 52 );
+  print( isMayorVar );
+}
+
+void currentDateFunction( DateTime currentDate){
+  print( currentDate.toString() );
+  print( currentDate.toIso8601String() );
+  print( currentDate.toUtc() );
+  print( currentDate.toLocal() );
+  print( currentDate.timeZoneName ); 
+}
+
+void dateFunction( DateTime date){
+  print( date.toString() );
+  print( date.toIso8601String() );
+  print( date.toUtc() );
+  print( date.toLocal() );
+  print( date.timeZoneName ); 
+}
+
+String diffDateToCurrentDate ( DateTime date ){
+  Duration diff = DateTime.now().difference(date);
+  return diff.inDays.toString();
+}
+
+void switchExample( String grado ){
+    switch( grado ){
+    case "A": {
+        print( "Excellent");
+      }
+      break;
+    case "B": {
+      print( "good" );
+    }
+      break;
+    
+    case "C": {
+      print("Fair");
+    }
+      break;
+      
+    case "D": {
+      print( "Poor");
+    }
+      break;
+      
+    default: {
+      print( "invalid choice");
+    }
+      break;
+  }
+}
+
+void loppWhile( int count, bool loopW ){
+    while( loopW ) {
+    print( " dentro del while ${ count }" );
+    count++;
+    if( count == 4 ){
+      loopW = false;
+    }
+  }
+  print( "afuera del while ");
+}
+
+void loppDoWhile( int n ){
+  do{
+    print(n);
+    n--;
+  } while( n > 0 );
+  
+  print( "salio" );
+}
+  
+void factorial ( int num ){
+  int facto = 1;
+  int num1 = num;
+  while( num >= 1 ) {
+    facto = facto * num;
+    num--; 
+  }
+  
+  print( "The factorial of ${num1} is ${ facto }" );
+}
+
+void exampleIf( var number ){
+  print( number.runtimeType );
+  
+  if( number == 'hola' ) {
+    print( 'hola mundo' );
+  } else {
+    print( 'este es un numero' );
+  }
+}
+void main() {
+ 
+  print( compareToDateNowasString('2020-11-20') );
+  
+  print( compareToDateNowasString('2022-09-01') );
+
+  
+  print( compareToDateNowasStringTwo('2020-11-20') );
+  
+  print( compareToDateNowasStringTwo('2022-09-01') );
+  
+
+  compareToDateNowPrint();
+  
+  print( esMayorAsString( true ) );
+  
+  print( esMayorAsString( esMayorFunction( 5, 6 ) ) );
+  
+  print( esMayorAsStringIf( esMayorFunction(8, 6) ) );
+  
+  print( esMayorDinamico( ( 6 > 5 ) ) );
+  
+  esMayorVar();
+  
+  currentDateFunction( DateTime.now() );
+  
+  dateFunction( DateTime.parse( '2020-11-20' ) );
+  
+  print( 'diferencia de dias ${diffDateToCurrentDate( DateTime.parse( '2020-11-20' ) )} ');
+  
+  switchExample( "B" );
+  
+  loppWhile( 1, true );
+  
+  loppDoWhile( 10 );
+  
+  factorial( 5 );
+  
+  exampleIf( "hola" );
+  
+}

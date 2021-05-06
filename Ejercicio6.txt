@@ -1,0 +1,56 @@
+import 'dart:async';
+
+abstract class Reloj {
+  
+  int segundos;
+  int minutos;
+  int horas;
+  
+  Reloj(this.horas, this.minutos, this.segundos);
+  void startCronoZero();
+  
+}
+  
+class Cronometro implements Reloj{
+  
+  int segundos = 0;
+  int minutos = 0;
+  int horas = 0;
+  
+  @override
+  void startCronoZero(){
+    Timer.periodic( Duration( seconds: 1 ), ( timer ) {
+      print( '${ horas }:${ minutos }:${ segundos }' );
+      if( segundos == 59 && minutos < 59){
+        segundos = -1;
+        minutos+=1;
+      }
+      if( minutos == 59 && segundos == 59 && horas < 23){
+        minutos = 0;
+        horas += 1;
+        segundos = -1;
+      }
+      
+      if (minutos == 59 && segundos == 59 && horas == 23){
+        minutos = 0;
+        horas = 0;
+        segundos = -1;
+        print( 'El incremento debe pasar a 0:0:0' );     
+      }
+      segundos +=1;
+     
+    });
+  }
+  
+}
+  
+
+
+
+void main() {
+  
+  Cronometro newCronoZero = new Cronometro();
+  
+  newCrono.startCronoZero();
+  
+}

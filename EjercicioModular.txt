@@ -167,6 +167,18 @@ void exampleIf( var number ){
     print( 'este es un numero' );
   }
 }
+
+void funcionAnonima(var list){
+  
+    for( int index = 0; index < list.length; index ++ ){
+    print( 'la fruta desde un for es: ${ list[index] }');
+  }
+  
+  list.forEach( ( String estoEsUnasVariable ) {
+    print( 'la fruta es ${estoEsUnasVariable}' );
+  });
+  
+}
 void main() {
  
   print( compareToDateNowasString('2020-11-20') );
@@ -206,5 +218,7 @@ void main() {
   factorial( 5 );
   
   exampleIf( "hola" );
+  
+  funcionAnonima([ 'apples', 'bananas', 'oranges' ]);
   
 }

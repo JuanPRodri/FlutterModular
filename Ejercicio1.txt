@@ -1,0 +1,65 @@
+import 'dart:math';
+
+abstract class Punto{
+  
+  final double coordenadaX;
+  final double coordenadaY;
+  
+  Punto (this.coordenadaX, this.coordenadaY);
+  
+  void toStringCartesianas();
+  
+  void toStringPolares();
+  
+}
+
+class Cartesianas extends Punto{
+  
+  Cartesianas(double coordenadaX, double coordenadaY) : super(coordenadaX, coordenadaY);
+  
+  @override
+  void toStringCartesianas() => print('(${coordenadaX},${coordenadaY}) De coordenadas Cartesianas a Cartesianas: (${coordenadaX},${coordenadaY})');
+  
+  @override
+  void toStringPolares(){
+    double r = sqrt(pow(coordenadaX, 2) + pow(coordenadaY, 2));
+    
+    double angulo = atan(coordenadaY / coordenadaX);
+    
+    print('(${coordenadaX},${coordenadaY}) De coordenadas Cartesianas a Polares: (${r},${(angulo*180)/pi}°)');
+  }
+}
+
+class Polares extends Punto{
+  
+  Polares(double coordenadaX, double coordenadaY) : super(coordenadaX, coordenadaY);
+  
+  @override
+  void toStringCartesianas(){
+    
+    double x = (coordenadaX * cos((coordenadaY * pi ) / 180));
+    double y = (coordenadaX * sin((coordenadaY * pi ) / 180)).roundToDouble();
+    
+    print('(${coordenadaX},${coordenadaY}°) De coordenadas Polares a Cartesianas: (${x},${y})');
+    
+  }
+  
+  void toStringPolares() => print('(${coordenadaX},${coordenadaY}°) De coordenadas Polares a Polares: (${coordenadaX},${coordenadaY}°)');
+}
+
+
+void main() {
+  
+  Cartesianas newPuntoCartesia = new Cartesianas(4,5);
+  Polares newPuntoPola = new Polares(6.4031242374328485, 51.34019174590991);
+  
+  newPuntoCartesia.toStringCartesianas();
+  newPuntoCartesia.toStringPolares();
+  
+  print("");
+  
+  newPuntoPola.toStringPolares();
+  newPuntoPola.toStringCartesianas();
+  
+  
+}

@@ -7,7 +7,11 @@ abstract class Reloj {
   int horas;
   
   Reloj(this.horas, this.minutos, this.segundos);
+  
   void startCronoZero();
+  void startCronoIn( String momentoIn );
+  void startCronoZeroAndUntil( String momentoUntil );
+  void startCronoInAndUntil( String momentoIn, String momentoUntil);
   
 }
   
@@ -42,6 +46,106 @@ class Cronometro implements Reloj{
     });
   }
   
+  @override
+  void startCronoIn( String momento ){
+    
+    horas = int.parse( momento.split( ':' ).elementAt( 0 ) );
+    minutos = int.parse( momento.split( ':' ).elementAt( 1 ) );
+    segundos = int.parse( momento.split( ':' ).elementAt( 2 ) );
+    
+    Timer.periodic( Duration( seconds: 1 ), ( timer ) {
+      print( '${ horas }:${ minutos }:${ segundos }' );
+      if( segundos == 59 && minutos < 59){
+        segundos = -1;
+        minutos+=1;
+      }
+      if( minutos == 59 && segundos == 59 && horas < 23){
+        minutos = 0;
+        horas += 1;
+        segundos = -1;
+      }
+      
+      if (minutos == 59 && segundos == 59 && horas == 23){
+        minutos = 0;
+        horas = 0;
+        segundos = -1;
+        print( 'El incremento debe pasar a 0:0:0' );     
+      }
+      segundos +=1;
+     
+    });
+  }
+  
+  void startCronoZeroAndUntil( String momentoUntil ){
+    
+    int horasFinal = int.parse( momentoUntil.split( ':' ).elementAt( 0 ) );
+    int minutosFinal = int.parse( momentoUntil.split( ':' ).elementAt( 1 ) );
+    int segundosFinal = int.parse( momentoUntil.split( ':' ).elementAt( 2 ) );
+    
+    Timer.periodic( Duration( seconds: 1 ), ( timer ) {
+      print( '${ horas }:${ minutos }:${ segundos }' );
+      if( horas == horasFinal && minutos == minutosFinal && segundos == segundosFinal ){
+        timer.cancel();
+      }
+      if( segundos == 59 && minutos < 59){
+        segundos = -1;
+        minutos+=1;
+      }
+      if( minutos == 59 && segundos == 59 && horas < 23){
+        minutos = 0;
+        horas += 1;
+        segundos = -1;
+      }
+      
+      if (minutos == 59 && segundos == 59 && horas == 23){
+        minutos = 0;
+        horas = 0;
+        segundos = -1;
+        print( 'El incremento debe pasar a 0:0:0' );     
+      }
+      segundos +=1;
+     
+    } );
+    
+  }
+  
+  void startCronoInAndUntil( String momentoIn, String momentoUntil){
+    
+    horas = int.parse(momentoIn.split(':').elementAt(0));
+    minutos = int.parse(momentoIn.split(':').elementAt(1));
+    segundos = int.parse(momentoIn.split(':').elementAt(2));
+    
+    int horasFinal = int.parse( momentoUntil.split( ':' ).elementAt( 0 ) );
+    int minutosFinal = int.parse( momentoUntil.split( ':' ).elementAt( 1 ) );
+    int segundosFinal = int.parse( momentoUntil.split( ':' ).elementAt( 2 ) );
+    
+    Timer.periodic( Duration( seconds: 1 ), ( timer ) {
+      print( '${ horas }:${ minutos }:${ segundos }' );
+      if( horas == horasFinal && minutos == minutosFinal && segundos == segundosFinal ){
+        timer.cancel();
+      }
+      if( segundos == 59 && minutos < 59){
+        segundos = -1;
+        minutos+=1;
+      }
+      if( minutos == 59 && segundos == 59 && horas < 23){
+        minutos = 0;
+        horas += 1;
+        segundos = -1;
+      }
+      
+      if (minutos == 59 && segundos == 59 && horas == 23){
+        minutos = 0;
+        horas = 0;
+        segundos = -1;
+        print( 'El incremento debe pasar a 0:0:0' );     
+      }
+      segundos +=1;
+     
+    } );
+    
+  }
+  
 }
   
 
@@ -49,8 +153,11 @@ class Cronometro implements Reloj{
 
 void main() {
   
-  Cronometro newCronoZero = new Cronometro();
+  Cronometro newCrono = new Cronometro();
   
-  newCrono.startCronoZero();
-  
+  /*newCrono.startCronoZero();
+    newCrono.startCronoIn( '0:0:15' );
+    newCrono.startCronoZeroAndUntil( '0:0:15' );
+    */
+    newCrono.startCronoInAndUntil( '0:0:15', '0:0:30' );
 }
